@@ -31,25 +31,17 @@ export const Home = observer(() => {
 
   return (
     <Fragment>
-      <todoContext.Provider
-        value={{ removeTodoItem: todoStore.removeTodoItem }}
-      >
+      <todoContext.Provider value={{ removeTodoItem: todoStore.removeTodoItem }}>
         <div>
           <div>
-            <p>
-              Добро пожаловать, {localStorage.getItem(KEY_AUTHORIZED_USER_NAME)}
-              !
-            </p>
-            <TodoInpunt
-              ref={inputElementRef}
-              onEdit={todoStore.todoInputHandle}
-            />
+            <p>Добро пожаловать, {localStorage.getItem(KEY_AUTHORIZED_USER_NAME)}!</p>
+            <TodoInpunt ref={inputElementRef} onEdit={todoStore.todoInputHandle} />
           </div>
 
           <div>
             <p>Мои заметки:</p>
 
-            {console.log('todoList.Length = ', todoStore.todoList.length)}
+            {/* {console.log('todoList.Length = ', todoStore.todoList.length)} */}
             {/*
             {todoStore.todoList.length ? (
               <TodoList
@@ -63,7 +55,7 @@ export const Home = observer(() => {
             <TodoList
               //todoList={todoList}
               //onCheckBoxClick={changeTodoItemStatus}
-              todoList={todoStore.todoList}
+              // todoList={todoStore.todoList}
               onCheckBoxClick={todoStore.changeTodoItemStatus}
               onDoubleClickItem={todoInputSetFocus}
             ></TodoList>

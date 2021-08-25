@@ -1,32 +1,31 @@
 import React from 'react';
+import TodoStore, { getTodoStore } from './stores/todoStore';
 
-function TodoInpunt(props, ref) {
+function TodoInpunt(props) {
   let [todoInputValue, setTodoInputValue] = React.useState('');
 
   function submitEventHandler(event) {
     event.preventDefault();
 
-    console.log('todoID', ref.current.todoID);
+    TodoStore.creteTodo('new todo');
 
-    if (todoInputValue.trim()) {
-      props.onEdit(todoInputValue);
-      setTodoInputValue('');
-    }
+    // console.log('todoID', props.ref.current.todoID);
+
+    // if (todoInputValue.trim()) {
+    //   props.onEdit(todoInputValue);
+    //   setTodoInputValue('');
+    // }
   }
 
   return (
-    <form
-      className='todo-input'
-      onSubmit={submitEventHandler}
-      style={{ margin: '10px 0px' }}
-    >
+    <form className="todo-input" onSubmit={submitEventHandler} style={{ margin: '10px 0px' }}>
       <input
         value={todoInputValue}
         onChange={(event) => setTodoInputValue(event.target.value)}
-        placeholder='Введите текст заметки'
-        ref={ref}
+        placeholder="Введите текст заметки"
+        ref={props.ref}
       />
-      <button type='submit' style={{ margin: '10px' }}>
+      <button type="submit" style={{ margin: '10px' }}>
         Добавить
       </button>
     </form>

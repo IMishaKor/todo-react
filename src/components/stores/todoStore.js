@@ -4,6 +4,38 @@ import TodoObject from '../todoStorage/TodoObject';
 
 const storage = new TodoStorage();
 
+class TodoStore {
+  todoList = [];
+  constructor(props) {
+    makeObservable(this, {
+      todoList: observable,
+      getTodo: action,
+      editTodo: action,
+      creteTodo: action,
+      removeTodo: action,
+    });
+  }
+
+  getTodo() {
+    this.todoList = storage.getTodosFromStorage();
+  }
+
+  creteTodo(text) {
+    let todoObject = new TodoObject({
+      id: Date.now(),
+      isActive: true,
+      text: text,
+    });
+    todoObject.saveIntoLocalStorage();
+    console.log('creteTodo', storage.getTodosFromStorage());
+    this.todoList = storage.getTodosFromStorage();
+  }
+  editTodo() {}
+  removeTodo() {}
+}
+
+export default new TodoStore();
+
 export function getTodoStore(inputElementRef) {
   return makeObservable(
     {
@@ -33,10 +65,7 @@ export function getTodoStore(inputElementRef) {
             if (todoItem.id === inputElementRef.current.todoID) {
               todoItem.text = text;
 
-              storage.setTodoIntoStorage(
-                'todoObject' + inputElementRef.current.todoID,
-                todoItem
-              );
+              storage.setTodoIntoStorage('todoObject' + inputElementRef.current.todoID, todoItem);
               console.log('changed todo item:', todoItem);
             }
 
