@@ -27,7 +27,6 @@ class TodoStore {
       text: text,
     });
     todoObject.saveIntoLocalStorage();
-    console.log('creteTodo', storage.getTodosFromStorage());
     this.todoList = storage.getTodosFromStorage();
   }
   editTodo() {}
